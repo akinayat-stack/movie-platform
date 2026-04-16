@@ -1,0 +1,208 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "admin",
+      "email": "admin@cinema.com",
+      "password": "$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+      "role": "admin"
+    },
+    {
+      "id": "2",
+      "username": "john_doe",
+      "email": "john@example.com",
+      "password": "$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+      "role": "user"
+    },
+    {
+      "username": "aruzhankinayat",
+      "email": "akinaatova2007@gmail.com",
+      "password": "$2b$10$c8N.2O2aRUfgL3zXXQ6DmeaTvceaDdzd9pPSvwTat9/zlYzMNgRmK",
+      "role": "user",
+      "id": "-tcmY47FH3M"
+    },
+    {
+      "username": "ya_legenda",
+      "email": "a.kinayatova@narxoz.kz",
+      "password": "$2b$10$Rl7PSySzFQoK8a4rAICjmewm22MVEBPXLLaxv2N1iERYYEF/GyxiG",
+      "role": "user",
+      "id": "HxMd3FedTgg"
+    },
+    {
+      "username": "azamat",
+      "email": "aza@gmail.com",
+      "password": "$2b$10$z6OXMNjLgo6eQCce8JNVPO79Dao655Vu8XSJw5McSFlnpYkQjqege",
+      "role": "user",
+      "id": "zr0plnN8FNA"
+    }
+  ],
+  "movies": [
+    {
+      "id": "2",
+      "title": "The Dark Knight",
+      "genre": "Action",
+      "description": "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests.",
+      "year": 2008,
+      "poster": "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg"
+    },
+    {
+      "id": "3",
+      "title": "Interstellar",
+      "genre": "Sci-Fi",
+      "description": "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
+      "year": 2014,
+      "poster": "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg"
+    },
+    {
+      "id": "4",
+      "title": "Pulp Fiction",
+      "genre": "Crime",
+      "description": "The lives of two mob hitmen, a boxer, a gangster and his wife intertwine in four tales of violence and redemption.",
+      "year": 1994,
+      "poster": "https://image.tmdb.org/t/p/w500/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg"
+    },
+    {
+      "id": "5",
+      "title": "The Shawshank Redemption",
+      "genre": "Drama",
+      "description": "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
+      "year": 1994,
+      "poster": "https://image.tmdb.org/t/p/w500/lyQBXzOQSuE59IsHyhrp0qIiPAz.jpg"
+    },
+    {
+      "id": "6",
+      "title": "Parasite",
+      "genre": "Thriller",
+      "description": "Greed and class discrimination threaten the newly formed symbiotic relationship between the wealthy Park family and the destitute Kim clan.",
+      "year": 2019,
+      "poster": "https://image.tmdb.org/t/p/w500/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg"
+    },
+    {
+      "title": "Home Alone",
+      "genre": "Comedy",
+      "description": "he McCallister family is preparing to spend Christmas in Paris, gathering at Peter and Kate's home in a Chicago suburb on the night before their departure. Peter and Kate's youngest son, Kevin, is the subject of ridicule by his older siblings.",
+      "year": 1990,
+      "poster": "https://upload.wikimedia.org/wikipedia/ru/thumb/0/03/Home_Alone_dvd_rus.jpg/330px-Home_Alone_dvd_rus.jpg",
+      "id": "KnkpAQ7R4PM"
+    },
+    {
+      "title": "1+1+1",
+      "genre": "Dramedy",
+      "description": "best movie 2",
+      "year": 2021,
+      "poster": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeXsQqz54ZArMzTZ0sq2km53e1UJWMQuhfrA&s",
+      "id": "i-C3m62Wpvs"
+    }
+  ],
+  "reviews": [
+    {
+      "id": "1",
+      "movieId": null,
+      "userId": "2",
+      "text": "An absolute masterpiece of modern cinema. The layered narrative keeps you guessing until the very end.",
+      "rating": 5,
+      "date": "2024-01-15"
+    },
+    {
+      "id": "2",
+      "movieId": "2",
+      "userId": "2",
+      "text": "Heath Ledger's Joker is one of the greatest performances in cinema history.",
+      "rating": 5,
+      "date": "2024-01-20"
+    },
+    {
+      "id": "3",
+      "movieId": "3",
+      "userId": "1",
+      "text": "Visually stunning and emotionally powerful. A true space odyssey for our generation.",
+      "rating": 4,
+      "date": "2024-02-01"
+    },
+    {
+      "movieId": null,
+      "userId": "1",
+      "text": "nice",
+      "rating": 5,
+      "date": "2026-04-06",
+      "id": "ELRoNa6OMAo"
+    },
+    {
+      "movieId": null,
+      "userId": "2",
+      "text": "мой любимый леооо",
+      "rating": 5,
+      "date": "2026-04-06",
+      "id": "grGXuaGwlGY"
+    },
+    {
+      "movieId": "3",
+      "userId": "2",
+      "text": "вау",
+      "rating": 5,
+      "date": "2026-04-06",
+      "id": "UBF0QxYx5RM"
+    },
+    {
+      "movieId": "5",
+      "userId": "2",
+      "text": "норм",
+      "rating": 5,
+      "date": "2026-04-06",
+      "id": "Mkvv5hiRrDE"
+    },
+    {
+      "movieId": "5",
+      "userId": "HxMd3FedTgg",
+      "text": "my fav movie 10/10",
+      "rating": 5,
+      "date": "2026-04-06",
+      "id": "uirBanZ9LHY"
+    },
+    {
+      "movieId": null,
+      "userId": "HxMd3FedTgg",
+      "text": "нормалньно",
+      "rating": 5,
+      "date": "2026-04-06",
+      "id": "l4OyWfK7APk"
+    },
+    {
+      "movieId": "6",
+      "userId": "HxMd3FedTgg",
+      "text": "корейцы",
+      "rating": 2,
+      "date": "2026-04-06",
+      "id": "XKfmKQdIHmQ"
+    },
+    {
+      "movieId": "6",
+      "userId": "HxMd3FedTgg",
+      "text": "love korwans",
+      "rating": 5,
+      "date": "2026-04-06",
+      "id": "wLaxk0vwoZc"
+    },
+    {
+      "movieId": null,
+      "movie_id": "1",
+      "userId": "zr0plnN8FNA",
+      "user_id": "zr0plnN8FNA",
+      "text": "Mosh",
+      "rating": 4,
+      "date": "2026-04-10",
+      "id": "Z6OqXS_BXRA"
+    },
+    {
+      "movieId": null,
+      "movie_id": "1",
+      "userId": "zr0plnN8FNA",
+      "user_id": "zr0plnN8FNA",
+      "text": "asdfsfsd",
+      "rating": 4,
+      "date": "2026-04-10",
+      "id": "gA_YT3rEFAU"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
