@@ -1,47 +1,67 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import { AuthProvider } from './context/AuthContext'
-import ProtectedRoute from './components/ProtectedRoute'
-import Navbar from './components/Navbar'
-import Movies from './pages/Movies'
-import MovieDetail from './pages/MovieDetail'
+import { AppBar, Box, Button, Container, Toolbar, Typography } from '@mui/material'
+import { Routes, Route, Navigate, Link, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import Login from './pages/Login'
 import Register from './pages/Register'
-import Profile from './pages/Profile'
-import Admin from './pages/Admin'
-import './App.css'
+import AdminDashboard from './pages/AdminDashboard'
+import UserDashboard from './pages/UserDashboard'
+import ProtectedRoute from './components/ProtectedRoute'
+import { clearAuth } from './redux/authReducer'
+import { NotificationProvider, useNotify } from './components/NotificationProvider'
 
-export default function App() {
+const Layout = () => {
+  const { token, user } = useSelector((state) => state.authReducer)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const notify = useNotify()
+
+  const logout = () => {
+    dispatch(clearAuth())
+    notify('Logged out')
+    navigate('/login')
+  }
+
   return (
-    <AuthProvider>
-      <BrowserRouter>
-        <Navbar />
-        <main>
-          <Routes>
-            <Route path="/" element={<Navigate to="/movies" replace />} />
-            <Route path="/movies" element={<Movies />} />
-            <Route path="/movies/:id" element={<MovieDetail />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route
-              path="/profile"
-              element={
-                <ProtectedRoute>
-                  <Profile />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/admin"
-              element={
-                <ProtectedRoute adminOnly>
-                  <Admin />
-                </ProtectedRoute>
-              }
-            />
-            <Route path="*" element={<Navigate to="/movies" replace />} />
-          </Routes>
-        </main>
-      </BrowserRouter>
-    </AuthProvider>
+    <>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography sx={{ flex: 1 }}>Simple Shop</Typography>
+          {!token && <Button color="inherit" component={Link} to="/login">Login</Button>}
+          {!token && <Button color="inherit" component={Link} to="/register">Register</Button>}
+          {token && <Typography sx={{ mr: 2 }}>{user?.name} ({user?.role})</Typography>}
+          {token && <Button color="inherit" onClick={logout}>Logout</Button>}
+        </Toolbar>
+      </AppBar>
+      <Container>
+        <Routes>
+          <Route path="/login" element={!token ? <Login /> : <Navigate to="/" replace />} />
+          <Route path="/register" element={!token ? <Register /> : <Navigate to="/" replace />} />
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute roles={['admin']}>
+                <AdminDashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                {user?.role === 'admin' ? <Navigate to="/admin" replace /> : <UserDashboard />}
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </Container>
+    </>
   )
 }
+
+const App = () => (
+  <NotificationProvider>
+    <Layout />
+  </NotificationProvider>
+)
+
+export default App
