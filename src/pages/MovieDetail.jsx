@@ -21,13 +21,13 @@ export default function MovieDetail() {
   useEffect(() => {
     const load = async () => {
       try {
-        const [movieData, reviewData, userData] = await Promise.all([
+        const [movieData, userData] = await Promise.all([
           api.get(`/movies/${id}`),
-          api.getMovieReviews(id),
           api.get('/users'),
         ])
         setMovie(movieData)
-        setReviews(reviewData.sort((a, b) => (b.date || '').localeCompare(a.date || '')))
+        const movieReviews = Array.isArray(movieData.reviews) ? movieData.reviews : []
+        setReviews(movieReviews.sort((a, b) => (b.date || '').localeCompare(a.date || '')))
         const userMap = {}
         userData.forEach(u => { userMap[u.id] = u.username })
         setUsers(userMap)
