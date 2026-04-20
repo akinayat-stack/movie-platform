@@ -1,97 +1,40 @@
 import { useState } from 'react'
-import { Link, useNavigate, useLocation } from 'react-router-dom'
-import bcrypt from 'bcryptjs'
-import { api } from '../api'
-import { useAuth } from '../context/AuthContext'
-import './Auth.css'
+import { useDispatch } from 'react-redux'
+import { useNavigate, Link } from 'react-router-dom'
+import { Box, Button, MenuItem, Paper, TextField, Typography } from '@mui/material'
+import api from '../api'
+import { setAuth } from '../redux/authReducer'
+import { useNotify } from '../components/NotificationProvider'
 
-export default function Login() {
-  const navigate = useNavigate()
-  const location = useLocation()
-  const { login } = useAuth()
+const Login = () => {
   const [form, setForm] = useState({ email: '', password: '' })
-  const [error, setError] = useState('')
-  const [loading, setLoading] = useState(false)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const notify = useNotify()
 
-  const from = location.state?.from?.pathname || '/movies'
-
-  const handleChange = e => setForm(f => ({ ...f, [e.target.name]: e.target.value }))
-
-  const handleSubmit = async e => {
+  const submit = async (e) => {
     e.preventDefault()
-    setError('')
-    if (!form.email || !form.password) return setError('Both fields are required.')
-
-    setLoading(true)
     try {
-      const users = await api.get(`/users?email=${form.email}`)
-      if (users.length === 0) return setError('Invalid email or password.')
-
-      const user = users[0]
-      const match = await bcrypt.compare(form.password, user.password)
-      if (!match) return setError('Invalid email or password.')
-
-      const { password: _, ...safeUser } = user
-      login(safeUser)
-      navigate(from, { replace: true })
-    } catch {
-      setError('Something went wrong. Is the server running?')
-    } finally {
-      setLoading(false)
+      const { data } = await api.post('/auth/login', form)
+      dispatch(setAuth(data))
+      notify('Login successful')
+      navigate('/')
+    } catch (error) {
+      notify(error.response?.data?.message || 'Login failed', 'error')
     }
   }
 
   return (
-    <div className="auth-page">
-      <div className="auth-card card fade-in">
-        <div className="auth-header">
-          <div className="auth-logo">▶ CINEREVIEW</div>
-          <h1 className="auth-title">Welcome Back</h1>
-          <p className="auth-sub">Sign in to your account</p>
-        </div>
-
-        <form className="auth-form" onSubmit={handleSubmit}>
-          {error && <div className="error-msg">{error}</div>}
-
-          <div className="form-group">
-            <label>Email</label>
-            <input
-              className="form-control"
-              type="email"
-              name="email"
-              placeholder="you@example.com"
-              value={form.email}
-              onChange={handleChange}
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Password</label>
-            <input
-              className="form-control"
-              type="password"
-              name="password"
-              placeholder="Your password"
-              value={form.password}
-              onChange={handleChange}
-            />
-          </div>
-
-          <button className="btn btn-primary auth-submit" disabled={loading}>
-            {loading ? 'Signing in…' : 'Sign In'}
-          </button>
-        </form>
-
-        <div className="demo-creds">
-          <p className="demo-label">Demo credentials</p>
-          <p><strong>Admin:</strong> admin@cinema.com / password</p>
-          <p><strong>User:</strong> john@example.com / password</p>
-        </div>
-
-        <p className="auth-footer">
-          No account? <Link to="/register" className="auth-link">Register</Link>
-        </p>
-      </div>
-    </div>
+    <Paper sx={{ p: 3, maxWidth: 420, mx: 'auto', mt: 6 }}>
+      <Typography variant="h5" sx={{ mb: 2 }}>Login</Typography>
+      <Box component="form" onSubmit={submit} sx={{ display: 'grid', gap: 2 }}>
+        <TextField label="Email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
+        <TextField label="Password" type="password" value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} />
+        <Button type="submit" variant="contained">Login</Button>
+      </Box>
+      <Typography sx={{ mt: 2 }}>No account? <Link to="/register">Register</Link></Typography>
+    </Paper>
   )
 }
+
+export default Login
